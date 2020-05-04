@@ -22,26 +22,28 @@
 AbRect rect10 = {abRectGetBounds, abRectCheck, {10,10}}; /**< 10x10 rectangle */
 AbRArrow rightArrow = {abRArrowGetBounds, abRArrowCheck, 30};
 
-AbRect paddle = {abRectGetBounds, abRectCheck, {3,10}}; //Paddle
+AbRect paddle = {abRectGetBounds, abRectCheck, {3,10}}; //tenis paddle
 
 AbRectOutline fieldOutline = {	/* playing field */
   abRectOutlineGetBounds, abRectOutlineCheck,   
   {screenWidth/2 - 10, screenHeight/2 - 10}
 };
-//////////////////////////////////////////////////////////////////////
-Layer MyLayer= {
-  (AbShape *)&paddle,
-  {10, screenHeight/2}, /**< center */
-  {0,0}, {0,0},//{15,screenHeight/2}, {screenWidth,screenHeight/2},  /* last & next pos */
-  COLOR_BLACK,
-  0,
-};
-Layer MyLayer2= {
+
+
+
+// Layer MyLayer= {
+//   (AbShape *)&paddle,
+//   {10, screenHeight/2}, /**< center */
+//   {0,0}, {0,0},//{15,screenHeight/2}, {screenWidth,screenHeight/2},  /* last & next pos */
+//   COLOR_BLACK,
+//   0,
+// };
+Layer c= {
   (AbShape *)&paddle,
   {screenWidth-10, screenHeight/2}, /**< center */
   {0,0}, {0,0},//{15,screenHeight/2}, {screenWidth,screenHeight/2},  /* last & next pos */
   COLOR_BLACK,
-  &MyLayer,
+  0,
 };
 ////////////////////////////////////////////////////////////////////////
 
@@ -89,7 +91,7 @@ typedef struct MovLayer_s {
 } MovLayer;
 
 /* initial value of {0,0} will be overwritten */
-MovLayer ml5 = { &MyLayer, {0,0}, 0}; /// My figure to test
+//MovLayer ml5 = { &MyLayer, {0,0}, 0}; /// My figure to test
 MovLayer ml6 = { &MyLayer2, {0,0}, 0}; /// My figure to test
 MovLayer ml3 = { &layer3, {1,1}, 0}; /**< not all layers move */
 
@@ -240,7 +242,7 @@ void game()
         P1OUT |= GREEN_LED;       /**< Green led on when CPU on */
         redrawScreen = 0;
         movLayerDraw(&ml0, &layer0);
-        movLayerDraw(&ml5, &MyLayer);
+       // movLayerDraw(&ml5, &MyLayer);
         movLayerDraw(&ml6, &MyLayer2);
 
         u_char width = screenWidth, height = screenHeight;
