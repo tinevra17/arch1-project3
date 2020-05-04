@@ -24,3 +24,4 @@ void buzzer_set_period(short cycles)
   CCR0 = cycles; 
   CCR1 = cycles >> 2;		/* one half cycle */
 }
+

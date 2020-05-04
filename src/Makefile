@@ -18,3 +18,4 @@ load: shapemotion.elf
 
 clean:
 	rm -f *.o *.elf
+
