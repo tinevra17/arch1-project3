@@ -287,6 +287,18 @@ void game()
   }
 }
 
+void game2(){
+	for(;;) { 
+	    while (!redrawScreen) { /**< Pause CPU if screen doesn't need updating */
+	      P1OUT &= ~GREEN_LED;    /**< Green led off witHo CPU */
+	      or_sr(0x10);	      /**< CPU OFF */
+	    }
+	    P1OUT |= GREEN_LED;       /**< Green led on when CPU on */
+	    redrawScreen = 0;
+	    movLayerDraw(&ml0, &layer0);
+  	}
+}
+
 void main(){
     P1DIR |= GREEN_LED;		/**< Green led on when CPU on */		
     P1OUT |= GREEN_LED;
@@ -303,8 +315,9 @@ void main(){
     layerGetBounds(&fieldLayer, &fieldFence);
     enableWDTInterrupts();      /**< enable periodic interrupt */
     or_sr(0x8);	              /**< GIE (enable interrupts) */
-    //game();
+    game2();
 }
+
 
 /** Watchdog timer interrupt handler. 15 interrupts/sec */
 void wdt_c_handler()
@@ -312,12 +325,12 @@ void wdt_c_handler()
   static short count = 0;
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
-  if (count == 20) {
+  if (count == 15) {
     mlAdvance(&ml0, &fieldFence);
-    mlBounce(&ml0, &ml5, &ml6); //test
-    if (~p2sw_read())
+    if (p2sw_read())
       redrawScreen = 1;
     count = 0;
-  }
+  } 
   P1OUT &= ~GREEN_LED;		    /**< Green LED off when cpu off */
 }
+
