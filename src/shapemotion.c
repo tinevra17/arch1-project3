@@ -5,7 +5,7 @@
  *  While the CPU is running the green LED is on, and
  *  when the screen does not need to be redrawn the CPU
  *  is turned off along with the green LED.
- */  
+
 #include <msp430.h>
 #include <libTimer.h>
 #include <lcdutils.h>
@@ -32,8 +32,7 @@ Layer layer4 = {
   COLOR_PINK,
   0
 };
-  
-
+ 
 Layer layer3 = {		/**< Layer with an orange circle */
   (AbShape *)&circle8,
   {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
@@ -191,6 +190,8 @@ void main()
   }
 }
 
+
+
 /** Watchdog timer interrupt handler. 15 interrupts/sec */
 void wdt_c_handler()
 {
@@ -205,3 +206,5 @@ void wdt_c_handler()
   } 
   P1OUT &= ~GREEN_LED;		    /**< Green LED off when cpu off */
 }
+
+*/  
