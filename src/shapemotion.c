@@ -97,7 +97,7 @@ MovLayer ml3 = { &layer3, {1,1}, 0}; /**< not all layers move */
 MovLayer ml1 = { &layer1, {3,2}, &ml3 }; 
 MovLayer ml0 = { &layer0, {-2,3}, &ml1 }; 
 
-static char points[3];
+static char name[10];
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
 {
@@ -184,18 +184,19 @@ void mlBounce(MovLayer *ml, MovLayer *fence, MovLayer *fence2)
                 int velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
                 newPos.axes[axis] += (2*velocity);
             }
-            points[0]= points[0]+1;
-            buzzer_init(2000);
+            
+            
             ml->layer->posNext = newPos;
         } /**< for ml */
         else if(shapeBoundary.botRight.axes[0] > paddleBoundary2.topLeft.axes[0] &&
             (shapeBoundary.botRight.axes[1] > paddleBoundary2.topLeft.axes[1] &&
             shapeBoundary.topLeft.axes[1] < paddleBoundary2.botRight.axes[1])){
+		buzzer_init(2000);
             for (axis = 0; axis < 2; axis ++) {
                 int velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
                 newPos.axes[axis] += (2*velocity);
             }
-            points[2]= points[2]+1;
+            
         buzzer_init(1000);
             ml->layer->posNext = newPos;
         }else {
@@ -215,9 +216,8 @@ Region fieldFence;		/**< fence around playing field  */
  */
 void game()
 {
-  points[0]='3';
-  points[2]='0';
-  points[1]='|';
+  points[0]='Samuel Tinevra';
+
   int vic=0;
 
 /////////////////////////////////////
