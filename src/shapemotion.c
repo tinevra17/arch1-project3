@@ -272,7 +272,7 @@ void game()
         
         ml5.layer->posNext = padPos;
         ml6.layer->posNext = padPos2;
-    }
+    
   }
 }
 
