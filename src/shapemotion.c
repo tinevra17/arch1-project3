@@ -236,7 +236,7 @@ void game()
   for(;;) {
 
         vic=0;
-        drawString5x7(screenWidth/2-5,2, points, COLOR_GREEN, COLOR_BLUE);
+        drawString5x7(screenWidth/2-5,2, COLOR_GREEN, COLOR_BLUE);
     //////////////////Reseting buttons
         char str[5];
 
