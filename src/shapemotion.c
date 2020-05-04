@@ -310,7 +310,7 @@ void main(){
     layerGetBounds(&fieldLayer, &fieldFence);
     enableWDTInterrupts();      /**< enable periodic interrupt */
     or_sr(0x8);	              /**< GIE (enable interrupts) */
-    game2();
+    game();
 }
 
 
