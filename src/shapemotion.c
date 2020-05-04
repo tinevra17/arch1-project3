@@ -256,7 +256,7 @@ paddle position
             str[i] = (switches & (1<<i)) ? '-' : '1'+i;
         }  
         if(str[0]=='1' && padPos.axes[1]>10){
-            int velocity = ml5.velocity.axes[1] = -3;
+            int velocity = ml6.velocity.axes[1] = -3;  //change
             padPos.axes[1] += (2*velocity);
         } else if(str[1]=='2' && padPos.axes[1]<(height-10)){
             int velocity = ml5.velocity.axes[1] = 3;
