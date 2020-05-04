@@ -215,7 +215,7 @@ Region fieldFence;		/**< fence around playing field  */
  */
 void game()
 {
-  points[0]='0';
+  points[0]='3';
   points[2]='0';
   points[1]='|';
   int vic=0;
@@ -227,7 +227,7 @@ void game()
     vec2Add(&padPos2, &ml6.layer->posNext, &ml6.velocity);
 ///////////////////////////////////
   for(;;) {
-    //if(points[0]<'5'&& points[2]<'5'){
+
         vic=0;
         drawString5x7(screenWidth/2-5,2, points, COLOR_GREEN, COLOR_BLUE);
     //////////////////Reseting buttons
