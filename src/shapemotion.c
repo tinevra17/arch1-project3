@@ -239,7 +239,7 @@ void game()
         }
         P1OUT |= GREEN_LED;       /**< Green led on when CPU on */
         redrawScreen = 0;
-        movLayerDraw(&ml0, &layer0);
+        //movLayerDraw(&ml0, &layer0);
         movLayerDraw(&ml5, &MyLayer);
         movLayerDraw(&ml6, &MyLayer2);
 
