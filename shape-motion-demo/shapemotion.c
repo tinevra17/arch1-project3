@@ -28,14 +28,6 @@ AbRectOutline fieldOutline = {	/* playing field */
   {screenWidth/2 - 10, screenHeight/2 - 10}
 };
 
-// AbRect paddle = {abRectGetBounds, abRectCheck, {3,10}}; //pong paddle 
-// Layer MyLayer= {
-//   (AbShape *)&paddle,
-//   {10, screenHeight/2}, /**< center */
-//   {0,0}, {0,0},//{15,screenHeight/2}, {screenWidth,screenHeight/2},  /* last & next pos */
-//   COLOR_BLACK,
-//   0,
-// };
 
 
 Layer layer4 = {
