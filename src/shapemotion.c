@@ -14,7 +14,7 @@
 #include <shape.h>
 #include <abCircle.h>
 #include "buzzer.h"
-
+#include "movement.h"
 
 #define GREEN_LED BIT6
 
@@ -22,28 +22,26 @@
 AbRect rect10 = {abRectGetBounds, abRectCheck, {10,10}}; /**< 10x10 rectangle */
 AbRArrow rightArrow = {abRArrowGetBounds, abRArrowCheck, 30};
 
-AbRect paddle = {abRectGetBounds, abRectCheck, {3,10}}; //tenis paddle
+AbRect paddle = {abRectGetBounds, abRectCheck, {3,10}}; //Paddle
 
 AbRectOutline fieldOutline = {	/* playing field */
   abRectOutlineGetBounds, abRectOutlineCheck,   
   {screenWidth/2 - 10, screenHeight/2 - 10}
 };
-
-
-
-// Layer MyLayer= {
-//   (AbShape *)&paddle,
-//   {10, screenHeight/2}, /**< center */
-//   {0,0}, {0,0},//{15,screenHeight/2}, {screenWidth,screenHeight/2},  /* last & next pos */
-//   COLOR_BLACK,
-//   0,
-// };
-Layer c= {
+//////////////////////////////////////////////////////////////////////
+Layer MyLayer= {
+  (AbShape *)&paddle,
+  {10, screenHeight/2}, /**< center */
+  {0,0}, {0,0},//{15,screenHeight/2}, {screenWidth,screenHeight/2},  /* last & next pos */
+  COLOR_BLACK,
+  0,
+};
+Layer MyLayer2= {
   (AbShape *)&paddle,
   {screenWidth-10, screenHeight/2}, /**< center */
   {0,0}, {0,0},//{15,screenHeight/2}, {screenWidth,screenHeight/2},  /* last & next pos */
   COLOR_BLACK,
-  0,
+  &MyLayer,
 };
 ////////////////////////////////////////////////////////////////////////
 
@@ -91,7 +89,7 @@ typedef struct MovLayer_s {
 } MovLayer;
 
 /* initial value of {0,0} will be overwritten */
-//MovLayer ml5 = { &MyLayer, {0,0}, 0}; /// My figure to test
+MovLayer ml5 = { &MyLayer, {0,0}, 0}; /// My figure to test
 MovLayer ml6 = { &MyLayer2, {0,0}, 0}; /// My figure to test
 MovLayer ml3 = { &layer3, {1,1}, 0}; /**< not all layers move */
 
@@ -222,12 +220,9 @@ void game()
   points[1]='|';
   int vic=0;
 
-/*
-paddle position 
-*/
+/////////////////////////////////////
     Vec2 padPos;
-    //vec2Add(&padPos, &ml5.layer->posNext, &ml5.velocity);
-	
+    vec2Add(&padPos, &ml5.layer->posNext, &ml5.velocity);
     Vec2 padPos2;
     vec2Add(&padPos2, &ml6.layer->posNext, &ml6.velocity);
     ///////////////////////////////////
@@ -245,7 +240,7 @@ paddle position
         P1OUT |= GREEN_LED;       /**< Green led on when CPU on */
         redrawScreen = 0;
         movLayerDraw(&ml0, &layer0);
-       // movLayerDraw(&ml5, &MyLayer);
+        movLayerDraw(&ml5, &MyLayer);
         movLayerDraw(&ml6, &MyLayer2);
 
         u_char width = screenWidth, height = screenHeight;
@@ -256,7 +251,7 @@ paddle position
             str[i] = (switches & (1<<i)) ? '-' : '1'+i;
         }  
         if(str[0]=='1' && padPos.axes[1]>10){
-            int velocity = ml6.velocity.axes[1] = -3;  //change
+            int velocity = ml5.velocity.axes[1] = -3;
             padPos.axes[1] += (2*velocity);
         } else if(str[1]=='2' && padPos.axes[1]<(height-10)){
             int velocity = ml5.velocity.axes[1] = 3;
@@ -320,7 +315,7 @@ void wdt_c_handler()
   count ++;
   if (count == 20) {
     mlAdvance(&ml0, &fieldFence);
-    //mlBounce(&ml0, &ml5, &ml6); //test
+    mlBounce(&ml0, &ml5, &ml6); //test
     if (~p2sw_read())
       redrawScreen = 1;
     count = 0;
