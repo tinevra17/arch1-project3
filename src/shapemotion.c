@@ -46,13 +46,7 @@ Layer MyLayer2= {
 };
 ////////////////////////////////////////////////////////////////////////
 
-Layer layer3 = {		/**< Layer with an orange circle */
-  (AbShape *)&circle8,
-  {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
-  {0,0}, {0,0},				    /* last & next pos */
-  COLOR_VIOLET,
-  &MyLayer2,
-};
+
 
 
 Layer fieldLayer = {		/* playing field as a layer */
@@ -60,7 +54,7 @@ Layer fieldLayer = {		/* playing field as a layer */
   {screenWidth/2, screenHeight/2},/**< center */
   {0,0}, {0,0},				    /* last & next pos */
   COLOR_BLUE,
-  &layer3
+  0
 };
 
 Layer layer1 = {		/**< Layer with a red square */
@@ -92,9 +86,9 @@ typedef struct MovLayer_s {
 /* initial value of {0,0} will be overwritten */
 MovLayer ml5 = { &MyLayer, {0,0}, 0}; /// My figure to test
 MovLayer ml6 = { &MyLayer2, {0,0}, 0}; /// My figure to test
-MovLayer ml3 = { &layer3, {1,1}, 0}; /**< not all layers move */
+//MovLayer ml3 = { &layer3, {1,1}, 0}; /**< not all layers move */
 
-MovLayer ml1 = { &layer1, {3,2}, &ml3 }; 
+MovLayer ml1 = { &layer1, {3,2}, &ml1 }; 
 MovLayer ml0 = { &layer0, {-2,3}, &ml1 }; 
 
 static char points[3];
