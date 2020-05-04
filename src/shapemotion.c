@@ -216,7 +216,14 @@ Region fieldFence;		/**< fence around playing field  */
  */
 void game()
 {
-  points[0]='Samuel Tinevra';
+  name[0]='S';
+  name[1]='a';
+  name[2]='m';
+  name[3]=' ';
+  name[4]='T';
+  name[5]='.';
+
+	
 
   int vic=0;
 
