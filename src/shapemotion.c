@@ -227,7 +227,7 @@ void game()
     vec2Add(&padPos2, &ml6.layer->posNext, &ml6.velocity);
 ///////////////////////////////////
   for(;;) {
-    if(points[0]<'5'&& points[2]<'5'){
+    //if(points[0]<'5'&& points[2]<'5'){
         vic=0;
         drawString5x7(screenWidth/2-5,2, points, COLOR_GREEN, COLOR_BLUE);
     //////////////////Reseting buttons
@@ -272,18 +272,6 @@ void game()
         
         ml5.layer->posNext = padPos;
         ml6.layer->posNext = padPos2;
-    }else{
-        clearScreen(COLOR_BLUE);
-        drawString5x7(screenWidth/2,screenHeight/2, "YOU WON", COLOR_BLACK, COLOR_BLUE);
-        vic++;
-        if(vic==10){
-            points[0]='0';
-            points[2]='0';
-            ml5.layer->posNext.axes[0]=screenWidth/2;
-            ml5.layer->posNext.axes[1]=screenHeight/2;
-            ml6.layer->posNext.axes[0]=screenWidth/2;
-            ml6.layer->posNext.axes[1]=screenHeight/2;
-        }
     }
   }
 }
@@ -344,7 +332,7 @@ void main(){
     layerGetBounds(&fieldLayer, &fieldFence);
     enableWDTInterrupts();      /**< enable periodic interrupt */
     or_sr(0x8);	              /**< GIE (enable interrupts) */
-    game2();
+    game();
 }
 
 
