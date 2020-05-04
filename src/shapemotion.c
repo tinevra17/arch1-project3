@@ -224,67 +224,67 @@ void game()
     vec2Add(&padPos, &ml5.layer->posNext, &ml5.velocity);
     Vec2 padPos2;
     vec2Add(&padPos2, &ml6.layer->posNext, &ml6.velocity);
-    ///////////////////////////////////
-  for(;;) {
-    if(points[0]<'5'&& points[2]<'5'){
-        vic=0;
-        drawString5x7(screenWidth/2-5,2, points, COLOR_GREEN, COLOR_BLUE);
-    //////////////////Reseting buttons
-        char str[5];
+///////////////////////////////////
+//   for(;;) {
+//     if(points[0]<'5'&& points[2]<'5'){
+//         vic=0;
+//         drawString5x7(screenWidth/2-5,2, points, COLOR_GREEN, COLOR_BLUE);
+//     //////////////////Reseting buttons
+//         char str[5];
 
-        while (!redrawScreen) { /**< Pause CPU if screen doesn't need updating */
-        P1OUT &= ~GREEN_LED;    /**< Green led off witHo CPU */
-        or_sr(0x10);	      /**< CPU OFF */
-        }
-        P1OUT |= GREEN_LED;       /**< Green led on when CPU on */
-        redrawScreen = 0;
-        movLayerDraw(&ml0, &layer0);
-        movLayerDraw(&ml5, &MyLayer);
-        movLayerDraw(&ml6, &MyLayer2);
+//         while (!redrawScreen) { /**< Pause CPU if screen doesn't need updating */
+//         P1OUT &= ~GREEN_LED;    /**< Green led off witHo CPU */
+//         or_sr(0x10);	      /**< CPU OFF */
+//         }
+//         P1OUT |= GREEN_LED;       /**< Green led on when CPU on */
+//         redrawScreen = 0;
+//         movLayerDraw(&ml0, &layer0);
+//         movLayerDraw(&ml5, &MyLayer);
+//         movLayerDraw(&ml6, &MyLayer2);
 
-        u_char width = screenWidth, height = screenHeight;
+//         u_char width = screenWidth, height = screenHeight;
 
-        u_int switches = p2sw_read(), i;
+//         u_int switches = p2sw_read(), i;
         
-        for (i = 0; i < 4; i++){
-            str[i] = (switches & (1<<i)) ? '-' : '1'+i;
-        }  
-        if(str[0]=='1' && padPos.axes[1]>10){
-            int velocity = ml5.velocity.axes[1] = -3;
-            padPos.axes[1] += (2*velocity);
-        } else if(str[1]=='2' && padPos.axes[1]<(height-10)){
-            int velocity = ml5.velocity.axes[1] = 3;
-            padPos.axes[1] += (2*velocity);
-        }
+//         for (i = 0; i < 4; i++){
+//             str[i] = (switches & (1<<i)) ? '-' : '1'+i;
+//         }  
+//         if(str[0]=='1' && padPos.axes[1]>10){
+//             int velocity = ml5.velocity.axes[1] = -3;
+//             padPos.axes[1] += (2*velocity);
+//         } else if(str[1]=='2' && padPos.axes[1]<(height-10)){
+//             int velocity = ml5.velocity.axes[1] = 3;
+//             padPos.axes[1] += (2*velocity);
+//         }
         
-        if(str[2]=='3' && padPos2.axes[1]>10){
-            int velocity = ml5.velocity.axes[1] = -3;
-            padPos2.axes[1] += (2*velocity);
-        } else if(str[3]=='4' && padPos2.axes[1]<(height-10)){
-            int velocity = ml5.velocity.axes[1] = 3;
-            padPos2.axes[1] += (2*velocity);
-        }
+//         if(str[2]=='3' && padPos2.axes[1]>10){
+//             int velocity = ml5.velocity.axes[1] = -3;
+//             padPos2.axes[1] += (2*velocity);
+//         } else if(str[3]=='4' && padPos2.axes[1]<(height-10)){
+//             int velocity = ml5.velocity.axes[1] = 3;
+//             padPos2.axes[1] += (2*velocity);
+//         }
         
-        //movement();
+    
 
-        str[4] = 0;
+//         str[4] = 0;
         
-        ml5.layer->posNext = padPos;
-        ml6.layer->posNext = padPos2;
-    }else{
-        clearScreen(COLOR_BLUE);
-        drawString5x7(screenWidth/2,screenHeight/2, "YOU WON", COLOR_BLACK, COLOR_BLUE);
-        vic++;
-        if(vic==10){
-            points[0]='0';
-            points[2]='0';
-            ml5.layer->posNext.axes[0]=screenWidth/2;
-            ml5.layer->posNext.axes[1]=screenHeight/2;
-            ml6.layer->posNext.axes[0]=screenWidth/2;
-            ml6.layer->posNext.axes[1]=screenHeight/2;
-        }
-    }
-  }
+//         ml5.layer->posNext = padPos;
+//         ml6.layer->posNext = padPos2;
+//     }else{
+//         clearScreen(COLOR_BLUE);
+//         drawString5x7(screenWidth/2,screenHeight/2, "YOU WON", COLOR_BLACK, COLOR_BLUE);
+//         vic++;
+//         if(vic==10){
+//             points[0]='0';
+//             points[2]='0';
+//             ml5.layer->posNext.axes[0]=screenWidth/2;
+//             ml5.layer->posNext.axes[1]=screenHeight/2;
+//             ml6.layer->posNext.axes[0]=screenWidth/2;
+//             ml6.layer->posNext.axes[1]=screenHeight/2;
+//         }
+//     }
+//   }
 }
 
 void main(){
@@ -303,7 +303,7 @@ void main(){
     layerGetBounds(&fieldLayer, &fieldFence);
     enableWDTInterrupts();      /**< enable periodic interrupt */
     or_sr(0x8);	              /**< GIE (enable interrupts) */
-    //game();
+    game();
 }
 
 /** Watchdog timer interrupt handler. 15 interrupts/sec */
