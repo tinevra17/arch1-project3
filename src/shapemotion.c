@@ -222,9 +222,12 @@ void game()
   points[1]='|';
   int vic=0;
 
-/////////////////////////////////////
+/*
+paddle position 
+*/
     Vec2 padPos;
-    vec2Add(&padPos, &ml5.layer->posNext, &ml5.velocity);
+    //vec2Add(&padPos, &ml5.layer->posNext, &ml5.velocity);
+	
     Vec2 padPos2;
     vec2Add(&padPos2, &ml6.layer->posNext, &ml6.velocity);
     ///////////////////////////////////
@@ -317,7 +320,7 @@ void wdt_c_handler()
   count ++;
   if (count == 20) {
     mlAdvance(&ml0, &fieldFence);
-    mlBounce(&ml0, &ml5, &ml6); //test
+    //mlBounce(&ml0, &ml5, &ml6); //test
     if (~p2sw_read())
       redrawScreen = 1;
     count = 0;
