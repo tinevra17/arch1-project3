@@ -13,6 +13,9 @@
 #include <p2switches.h>
 #include <shape.h>
 #include <abCircle.h>
+#include "buzzer.h"
+#include "movement.h"
+
 
 #define GREEN_LED BIT6
 
@@ -24,6 +27,15 @@ AbRectOutline fieldOutline = {	/* playing field */
   abRectOutlineGetBounds, abRectOutlineCheck,   
   {screenWidth/2 - 10, screenHeight/2 - 10}
 };
+
+Layer MyLayer= {
+  (AbShape *)&paddle,
+  {10, screenHeight/2}, /**< center */
+  {0,0}, {0,0},//{15,screenHeight/2}, {screenWidth,screenHeight/2},  /* last & next pos */
+  COLOR_BLACK,
+  0,
+};
+
 
 Layer layer4 = {
   (AbShape *)&rightArrow,
