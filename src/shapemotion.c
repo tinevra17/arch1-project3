@@ -218,10 +218,10 @@ void game()
 {
   name[0]='S';
   name[1]='a';
-  name[2]='m';
-  name[3]=' ';
-  name[4]='T';
-  name[5]='.';
+//   name[2]='m';
+//   name[3]=' ';
+//   name[4]='T';
+//   name[5]='.';
 
 	
 
