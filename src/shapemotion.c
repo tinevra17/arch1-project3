@@ -306,6 +306,8 @@ void game2(){
 		//white boxes
 	    movLayerDraw(&ml5, &MyLayer);
        	    movLayerDraw(&ml6, &MyLayer2);
+	u_char width = screenWidth;
+	u_char height = screenHeight;
 		
 		
 	if(str[0]=='1' && padPos.axes[1]>10){
