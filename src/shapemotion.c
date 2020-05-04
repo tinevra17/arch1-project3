@@ -246,7 +246,7 @@ void game()
         }
         P1OUT |= GREEN_LED;       /**< Green led on when CPU on */
         redrawScreen = 0;
-        //movLayerDraw(&ml0, &layer0);
+        movLayerDraw(&ml0, &layer0);
         movLayerDraw(&ml5, &MyLayer);
         movLayerDraw(&ml6, &MyLayer2);
 
@@ -283,45 +283,7 @@ void game()
   }
 }
 
-void game2(){
-	
-	Vec2 padPos;
-	vec2Add(&padPos, &ml5.layer->posNext, &ml5.velocity);
-	Vec2 padPos2;
-	vec2Add(&padPos2, &ml6.layer->posNext, &ml6.velocity);
-	for(;;) { 
-	    char str[5];
-	    while (!redrawScreen) { /**< Pause CPU if screen doesn't need updating */
-	      P1OUT &= ~GREEN_LED;    /**< Green led off witHo CPU */
-	      or_sr(0x10);	      /**< CPU OFF */
-	    }
-	    P1OUT |= GREEN_LED;       /**< Green led on when CPU on */
-	    redrawScreen = 0;
-	    movLayerDraw(&ml0, &layer0);
-		//white boxes
-	    movLayerDraw(&ml5, &MyLayer);
-       	    movLayerDraw(&ml6, &MyLayer2);
-	u_char width = screenWidth;
-	u_char height = screenHeight;
-		
-		
-	if(str[0]=='1' && padPos.axes[1]>10){
-            int velocity = ml5.velocity.axes[1] = -3;
-            padPos.axes[1] += (2*velocity);
-        } else if(str[1]=='2' && padPos.axes[1]<(height-10)){
-            int velocity = ml5.velocity.axes[1] = 3;
-            padPos.axes[1] += (2*velocity);
-        }
-        
-        if(str[2]=='3' && padPos2.axes[1]>10){
-            int velocity = ml5.velocity.axes[1] = -3;
-            padPos2.axes[1] += (2*velocity);
-        } else if(str[3]=='4' && padPos2.axes[1]<(height-10)){
-            int velocity = ml5.velocity.axes[1] = 3;
-            padPos2.axes[1] += (2*velocity);
-        }
-  	}
-}
+
 
 void main(){
     P1DIR |= GREEN_LED;		/**< Green led on when CPU on */		
