@@ -102,6 +102,7 @@ void movLayerDraw(MovLayer *movLayers, Layer *layers)
   int row, col;
   MovLayer *movLayer;
 
+
   and_sr(~8);			/**< disable interrupts (GIE off) */
   for (movLayer = movLayers; movLayer; movLayer = movLayer->next) { /* for each moving layer */
     Layer *l = movLayer->layer;
@@ -109,8 +110,6 @@ void movLayerDraw(MovLayer *movLayers, Layer *layers)
     l->pos = l->posNext;
   }
   or_sr(8);			/**< disable interrupts (GIE on) */
-
-
   for (movLayer = movLayers; movLayer; movLayer = movLayer->next) { /* for each moving layer */
     Region bounds;
     layerGetBounds(movLayer->layer, &bounds);
@@ -133,10 +132,9 @@ void movLayerDraw(MovLayer *movLayers, Layer *layers)
     } // for row
   } // for moving layer being updated
 }	  
+	  
 
 
-
-//Region fence = {{10,30}, {SHORT_EDGE_PIXELS-10, LONG_EDGE_PIXELS-10}}; /**< Create a fence region */
 
 /** Advances a moving shape within a fence
  *  
@@ -161,6 +159,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
     ml->layer->posNext = newPos;
   } /**< for ml */
 }
+
 
 void mlBounce(MovLayer *ml, MovLayer *fence, MovLayer *fence2)
 {
